@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd"
+        >
+	
+	 <!-- 开启注解扫描 
+	 开启扫描的包一定不要写错了.否则找不到相应的bean
+	 -->
+	<context:component-scan base-package="com.hjd.aop"/>
+	
+	<bean id="userDao_proxy" class="com.hjd.aop.ProxyFactory" factory-method="getProxyInstance">
+	   <!-- constructor-arg除了给构造函数提供参数,也可以给普通方法提供参数 -->
+	   <constructor-arg index="0" ref="userDao"/>
+	   <constructor-arg index="1" ref="aop"/>
+	</bean>
+</beans>      

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd"
+        >
+	
+	<bean id="orderDao" class="com.hjd.aop1_pointcut.OrderDao"/>
+	<bean id="aop" class="com.hjd.aop1_pointcut.Aop"/>
+	 
+	 <!-- xml形式的aop配置 -->
+	<aop:config>
+	   <!-- 定义一个切入点表达式 -->
+	   <aop:pointcut expression="execution(* com.hjd.aop1_pointcut.*.*(..))" id="pt"/>
+	   
+	   <!--
+	   切入点表达式:
+	   需要注意的是,写切入点表达式的时候,一定是拦截到方法的.
+	   
+	   .*(..):指定类的所有方法
+	   *.*(..):所有类的所有方法
+	   ..*.*(..):某包及其子包的所有类的所有方法
+	   public * *(..):拦截public的方法
+	   * save*(..):拦截save开头的方法
+	   execution() || execution():多个表达式
+	   execution() or execution():多个表达式
+	   !execution():取非值
+	    not execution():取非值(需要注意的是not前面要有空格) 
+	    -->
+	   
+	   <!-- 切面 -->
+	   <aop:aspect ref="aop">
+	       <!-- 前置通知 -->
+	       <aop:before method="begin" pointcut="execution(* com.hjd.aop1_pointcut.*.*(..))"/>
+	       <!-- 切入点的使用 (method千万不要写错了)-->
+	       <aop:after method="end" pointcut-ref="pt"/>
+	   </aop:aspect>
+	</aop:config>
+	
+</beans>      

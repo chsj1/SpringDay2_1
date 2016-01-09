@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd"
+        >
+	
+	 <!-- 开启注解扫描 
+	 开启扫描的包一定不要写错了.否则找不到相应的bean
+	 -->
+	<context:component-scan base-package="com.hjd.aop1"/>
+	
+	<!-- 
+	开启aop注解.
+	如果目标对象实现了接口,那么采用JDK代理(结果类似于:class $Proxy8)
+	如果目标对象没有实现接口,那么采用cglib代理(结果类似于:class com.hjd.aop1.OrderDao$$EnhancerByCGLIB$$94eceb3a)
+	 -->
+	<aop:aspectj-autoproxy ></aop:aspectj-autoproxy>
+</beans>      

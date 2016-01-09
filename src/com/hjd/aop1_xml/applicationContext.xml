@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd"
+        >
+	
+	<bean id="orderDao" class="com.hjd.aop1_xml.OrderDao"/>
+	<bean id="aop" class="com.hjd.aop1_xml.Aop"/>
+	 
+	 <!-- xml形式的aop配置 -->
+	<aop:config>
+	   <!-- 定义一个切入点表达式 -->
+	   <aop:pointcut expression="execution(* com.hjd.aop1_xml.*.*(..))" id="pt"/>
+	   <!-- 切面 -->
+	   <aop:aspect ref="aop">
+	       <!-- 前置通知 -->
+	       <aop:before method="begin" pointcut="execution(* com.hjd.aop1_xml.*.*(..))"/>
+	       <!-- 切入点的使用 (method千万不要写错了)-->
+	       <aop:after method="end" pointcut-ref="pt"/>
+	   </aop:aspect>
+	</aop:config>
+	
+</beans>      
