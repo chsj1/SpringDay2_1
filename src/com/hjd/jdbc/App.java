@@ -5,7 +5,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * 用于测试自己实现的aop
+ * 用于演示spring与jdbc的整合
  * @author huangjundong
  *
  */
